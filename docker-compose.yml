@@ -1,0 +1,139 @@
+version: "3"
+services:
+  redis-cluster-6380:
+    image: redis:7.4.4-alpine3.21
+    container_name: node-80
+    networks:
+      cluster-net:
+        ipv4_address: 172.16.238.10
+    ports:
+      - "6380:6380"
+      - "16380:16380"
+    volumes:
+      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./log/6380:/var/log/redis
+      - ./data:/data/redis
+    command: >
+      sh -c "redis-server /usr/local/etc/redis/redis.conf \
+      --cluster-announce-ip $$ANNOUNCE_IP \
+      --cluster-announce-port 6380 \
+      --cluster-announce-bus-port 16380 \
+      --port 6380"
+    environment:
+      - ANNOUNCE_IP=${ANNOUNCE_IP}
+      - TZ=Asia/Shanghai
+  redis-cluster-6381:
+    image: redis:7.4.4-alpine3.21
+    container_name: node-81
+    networks:
+      cluster-net:
+        ipv4_address: 172.16.238.11
+    ports:
+      - "6381:6381"
+      - "16381:16381"
+    volumes:
+      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./log/6381:/var/log/redis
+      - ./data:/data/redis
+    command: >
+      sh -c "redis-server /usr/local/etc/redis/redis.conf \
+      --cluster-announce-ip $$ANNOUNCE_IP \
+      --cluster-announce-port 6381 \
+      --cluster-announce-bus-port 16381 \
+      --port 6381"
+    environment:
+      - ANNOUNCE_IP=${ANNOUNCE_IP}
+      - TZ=Asia/Shanghai
+  redis-cluster-6382:
+    image: redis:7.4.4-alpine3.21
+    container_name: node-82
+    networks:
+      cluster-net:
+        ipv4_address: 172.16.238.12
+    ports:
+      - "6382:6382"
+      - "16382:16382"
+    volumes:
+      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./log/6382:/var/log/redis
+      - ./data:/data/redis
+    command: >
+      sh -c "redis-server /usr/local/etc/redis/redis.conf \
+      --cluster-announce-ip $$ANNOUNCE_IP \
+      --cluster-announce-port 6382 \
+      --cluster-announce-bus-port 16382 \
+      --port 6382"
+    environment:
+      - ANNOUNCE_IP=${ANNOUNCE_IP}
+      - TZ=Asia/Shanghai
+  redis-cluster-6383:
+    image: redis:7.4.4-alpine3.21
+    container_name: node-83
+    networks:
+      cluster-net:
+        ipv4_address: 172.16.238.13
+    ports:
+      - "6383:6383"
+      - "16383:16383"
+    volumes:
+      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./log/6383:/var/log/redis
+      - ./data:/data/redis
+    command: >
+      sh -c "redis-server /usr/local/etc/redis/redis.conf \
+      --cluster-announce-ip $$ANNOUNCE_IP \
+      --cluster-announce-port 6383 \
+      --cluster-announce-bus-port 16383 \
+      --port 6383"
+    environment:
+      - ANNOUNCE_IP=${ANNOUNCE_IP}
+      - TZ=Asia/Shanghai
+  redis-cluster-6384:
+    image: redis:7.4.4-alpine3.21
+    container_name: node-84
+    networks:
+      cluster-net:
+        ipv4_address: 172.16.238.14
+    ports:
+      - "6384:6384"
+      - "16384:16384"
+    volumes:
+      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./log/6384:/var/log/redis
+      - ./data:/data/redis
+    command: >
+      sh -c "redis-server /usr/local/etc/redis/redis.conf \
+      --cluster-announce-ip $$ANNOUNCE_IP \
+      --cluster-announce-port 6384 \
+      --cluster-announce-bus-port 16384 \
+      --port 6384"
+    environment:
+      - ANNOUNCE_IP=${ANNOUNCE_IP}
+      - TZ=Asia/Shanghai
+  redis-cluster-6385:
+    image: redis:7.4.4-alpine3.21
+    container_name: node-85
+    networks:
+      cluster-net:
+        ipv4_address: 172.16.238.15
+    ports:
+      - "6385:6385"
+      - "16385:16385"
+    volumes:
+      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./log/6385:/var/log/redis
+      - ./data:/data/redis
+    command: >
+      sh -c "redis-server /usr/local/etc/redis/redis.conf \
+      --cluster-announce-ip $$ANNOUNCE_IP \
+      --cluster-announce-port 6385 \
+      --cluster-announce-bus-port 16385 \
+      --port 6385"
+    environment:
+      - ANNOUNCE_IP=${ANNOUNCE_IP}
+      - TZ=Asia/Shanghai
+networks:
+  cluster-net:
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
